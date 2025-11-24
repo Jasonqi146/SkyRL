@@ -6,8 +6,8 @@ set -x
 # add OPENAI_API_KEY and WANDB_API_KEY to .env.llm_judge
 # bash examples/llm_as_a_judge/run_llm_judge.sh
 
-DATA_DIR="$HOME/data/gsm8k_llm_judge"
-CKPT_PATH="$HOME/ckpts/llm_judge"
+DATA_DIR="$HOME/SkyRL/skyrl-train/examples/llm_as_a_judge"
+CKPT_PATH="$HOME/SkyRL/skyrl-train/ckpts/llm_judge"
 
 NUM_GPUS=4
 NUM_INFERENCE_ENGINES=4
@@ -19,7 +19,7 @@ uv run --isolated --extra vllm --env-file .env.llm_judge -m examples.llm_as_a_ju
   data.train_data="['$DATA_DIR/train.parquet']" \
   data.val_data="['$DATA_DIR/validation.parquet']" \
   trainer.algorithm.advantage_estimator="grpo" \
-  trainer.policy.model.path="Qwen/Qwen2.5-1.5B-Instruct" \
+  trainer.policy.model.path="Qwen/Qwen3-8B" \
   trainer.placement.colocate_all=true \
   trainer.strategy=fsdp2 \
   trainer.placement.policy_num_gpus_per_node=$NUM_GPUS \
